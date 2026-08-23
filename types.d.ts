@@ -1,30 +1,17 @@
-declare module 'pdf-parse' {
-  interface PDFData {
+declare module 'unpdf' {
+  interface ExtractTextResult {
     text: string;
-    numpages: number;
-    numrender: number;
-    info: {
-      PDFFormatVersion?: string;
-      IsAcroFormPresent?: boolean;
-      IsCollectionPresent?: boolean;
-      [key: string]: any;
-    };
-    metadata: {
-      info: { [key: string]: any };
-      metadata?: { [key: string]: any };
-    };
-    version: string | null;
+    totalPages: number;
+    info: Record<string, unknown>;
   }
 
-  function pdfParse(buffer: Buffer): Promise<PDFData>;
-  export default pdfParse;
+  export function extractText(
+    data: Uint8Array,
+    options?: { maxPages?: number }
+  ): Promise<ExtractTextResult>;
 }
 
-declare module 'mammoth' {
-  interface ExtractResult {
-    value: string;
-    messages: { type: string; message: string }[];
-  }
-
-  export function extractRawText(options: { buffer: Buffer }): Promise<ExtractResult>;
+declare module 'fflate' {
+  export function unzipSync(data: Uint8Array): Record<string, Uint8Array>;
+  export function strFromU8(data: Uint8Array): string;
 }

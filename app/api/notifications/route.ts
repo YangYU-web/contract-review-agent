@@ -3,7 +3,6 @@
 // 数据存储：Supabase email_notifications 表，失败时降级为 Mock 数据
 
 import { NextRequest, NextResponse } from 'next/server';
-import { randomUUID } from 'crypto';
 import {
   EmailNotification,
   NotificationEventType,
@@ -212,7 +211,7 @@ export async function POST(request: NextRequest) {
 
     // 降级：使用内存 Mock 数据
     const notification: EmailNotification = {
-      id: `ntf-${randomUUID().slice(0, 8)}`,
+      id: `ntf-${crypto.randomUUID().slice(0, 8)}`,
       event_type,
       recipient,
       recipient_name: recipientName,

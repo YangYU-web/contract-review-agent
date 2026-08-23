@@ -5,6 +5,9 @@ import MobileNav from '@/components/MobileNav';
 import { AuthProvider } from '@/components/AuthProvider';
 import PWARegister from '@/components/PWARegister';
 
+// Cloudflare Pages: 所有路由使用 Edge Runtime
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: '企业合同智能审查Agent',
   description: 'AI驱动的企业合同风险识别与修改建议平台',

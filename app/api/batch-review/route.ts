@@ -7,7 +7,6 @@ import { isClaudeConfigured, reviewContract } from '@/lib/claude';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { MOCK_REVIEW_RESULT } from '@/lib/mock-data';
 import { BatchReviewItem, BatchReviewResult, AIReviewResult } from '@/lib/types';
-import { randomUUID } from 'crypto';
 
 // 文件大小限制 10MB
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -76,7 +75,7 @@ async function reviewSingleFile(file: File, index: number): Promise<BatchReviewI
   }
 
   // ===== Step 2: AI审查 =====
-  const reviewId = randomUUID();
+  const reviewId = crypto.randomUUID();
   let reviewResult: AIReviewResult;
 
   if (isClaudeConfigured()) {

@@ -7,7 +7,6 @@ import { parseDocument } from '@/lib/contract-parser';
 import { isClaudeConfigured, reviewContract } from '@/lib/claude';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { MOCK_REVIEW_RESULT } from '@/lib/mock-data';
-import { randomUUID } from 'crypto';
 
 // 全局任务存储（开发模式下服务器持续运行）
 type JobStatus = 'parsing' | 'analyzing' | 'completed' | 'failed';
@@ -81,8 +80,8 @@ export async function POST(request: NextRequest) {
     }
 
     // ===== Step 2: 创建审查任务，后台执行 =====
-    const reviewId = randomUUID();
-    const jobId = randomUUID();
+    const reviewId = crypto.randomUUID();
+    const jobId = crypto.randomUUID();
 
     reviewJobs.set(jobId, {
       status: 'analyzing',

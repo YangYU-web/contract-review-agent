@@ -14,13 +14,13 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.1",
     "@supabase/supabase-js": "^2.45.0",
+    "fflate": "^0.8.3",
     "https-proxy-agent": "^9.1.0",
     "lucide-react": "^0.427.0",
-    "mammoth": "^1.8.0",
     "next": "^14.2.5",
-    "pdf-parse": "^1.1.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "unpdf": "^1.8.1"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.0",

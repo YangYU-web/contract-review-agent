@@ -1,17 +1,101 @@
-// ===== 文档解析模块 =====
-// 支持PDF和Word文档的文本提取
+// ===== 文档解析模块（Edge Runtime 兼容） =====
+// 使用 unpdf 替代 pdf-parse，使用 fflate 替代 mammoth
+// 支持 PDF 和 Word 文档的文本提取
 
-// 动态导入避免构建时问题
+import { extractText } from 'unpdf';
+import { unzipSync, strFromU8 } from 'fflate';
+
+// PDF 解析（Edge 兼容）
 async function parsePDF(buffer: Buffer): Promise<string> {
-  const pdfParse = (await import('pdf-parse')).default;
-  const data = await pdfParse(buffer);
-  return data.text;
+  const { text } = await extractText(new Uint8Array(buffer), { maxPages: 0 });
+  return text;
 }
 
-async function parseDocx(buffer: Buffer): Promise<string> {
-  const mammoth = await import('mammoth');
-  const result = await mammoth.extractRawText({ buffer });
-  return result.value;
+// DOCX 解析（Edge 兼容，使用 fflate 解压 + XML 解析）
+function parseDocx(buffer: Buffer): string {
+  // DOCX 是 ZIP 格式，解压后读取 word/document.xml
+  const files = unzipSync(new Uint8Array(buffer));
+  const documentXml = files['word/document.xml'];
+  if (!documentXml) {
+    throw new Error('DOCX 文件格式无效：未找到 word/document.xml');
+  }
+  const xmlText = strFromU8(documentXml);
+  return extractTextFromDocxXml(xmlText);
+}
+
+// 从 DOCX 的 XML 中提取纯文本
+function extractTextFromDocxXml(xml: string): string {
+  // 移除 XML 命名空间声明和处理指令
+  let text = xml;
+
+  // 提取 <w:t> 标签内容（Word 文档中的文本节点）
+  const textParts: string[] = [];
+  const regex = /<w:t[^>]*>([\s\S]*?)<\/w:t>/g;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    textParts.push(decodeXmlEntities(match[1]));
+  }
+
+  // 段落分隔：<w:p> 标签表示段落
+  const paragraphRegex = /<w:p[\s>]/g;
+  const paragraphPositions: number[] = [];
+  let pMatch;
+  while ((pMatch = paragraphRegex.exec(text)) !== null) {
+    paragraphPositions.push(pMatch.index);
+  }
+
+  // 如果没有提取到文本，返回空字符串
+  if (textParts.length === 0) {
+    return '';
+  }
+
+  // 按段落组合文本
+  const result: string[] = [];
+  let textIndex = 0;
+  let lastPos = 0;
+
+  for (const pos of paragraphPositions) {
+    // 收集该段落之前的所有文本
+    const chunkEnd = text.indexOf('<w:t', pos);
+    if (chunkEnd === -1) continue;
+
+    // 找到段落范围内的文本
+    const nextParagraphPos = paragraphPositions[paragraphPositions.indexOf(pos) + 1] ?? text.length;
+
+    // 提取段落内所有 <w:t> 内容
+    const paragraphTexts: string[] = [];
+    let searchStart = pos;
+    while (searchStart < nextParagraphPos) {
+      const tStart = text.indexOf('<w:t', searchStart);
+      if (tStart === -1 || tStart >= nextParagraphPos) break;
+      const tContentStart = text.indexOf('>', tStart) + 1;
+      const tEnd = text.indexOf('</w:t>', tContentStart);
+      if (tEnd === -1) break;
+      paragraphTexts.push(decodeXmlEntities(text.substring(tContentStart, tEnd)));
+      searchStart = tEnd + 6;
+    }
+
+    if (paragraphTexts.length > 0) {
+      result.push(paragraphTexts.join(''));
+    }
+  }
+
+  // 如果段落方法没有提取到内容，使用简单方法
+  if (result.length === 0) {
+    return textParts.join('\n');
+  }
+
+  return result.join('\n');
+}
+
+// 解码 XML 实体
+function decodeXmlEntities(text: string): string {
+  return text
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'");
 }
 
 // 主解析函数

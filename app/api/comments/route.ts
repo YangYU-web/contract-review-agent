@@ -3,7 +3,6 @@
 // 数据存储：Supabase contract_comments 表，失败时降级为 Mock 数据
 
 import { NextRequest, NextResponse } from 'next/server';
-import { randomUUID } from 'crypto';
 import { ContractComment } from '@/lib/types';
 import { getMockComments, extractMentions } from '@/lib/comments';
 
@@ -224,7 +223,7 @@ export async function POST(request: NextRequest) {
     }
 
     const newComment: ContractComment = {
-      id: `cmt-${randomUUID().slice(0, 8)}`,
+      id: `cmt-${crypto.randomUUID().slice(0, 8)}`,
       contract_id,
       risk_id: risk_id || undefined,
       user_id: `u-${user_name}`,
