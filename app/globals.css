@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-50: #f5f3ff;
+  --brand-100: #ede9fe;
+  --brand-500: #8b5cf6;
+  --brand-600: #7c3aed;
+  --brand-700: #6d28d9;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+  /* 优化滚动行为，禁止过度滚动 */
+  overscroll-behavior: none;
+  /* 移除移动端点击高亮 */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 渐变背景 */
+.gradient-bg {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 卡片悬浮效果 */
+.card-hover {
+  transition: all 0.2s ease;
+}
+.card-hover:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* 风险等级颜色 */
+.risk-high {
+  border-left: 4px solid #dc2626;
+  background-color: #fef2f2;
+}
+.risk-medium {
+  border-left: 4px solid #d97706;
+  background-color: #fffbeb;
+}
+.risk-low {
+  border-left: 4px solid #16a34a;
+  background-color: #f0fdf4;
+}
+
+/* 加载动画 */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+/* 进度条动画 */
+@keyframes progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+.animate-progress {
+  animation: progress 1.5s ease-in-out;
+}
+
+/* 拖拽区域 */
+.dropzone {
+  border: 2px dashed #cbd5e1;
+  transition: all 0.2s ease;
+}
+.dropzone:hover,
+.dropzone.dragging {
+  border-color: var(--brand-500);
+  background-color: var(--brand-50);
+}
+
+/* 隐藏滚动条（用于导航栏小屏横向滚动） */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================================
+   移动端优化
+   ======================================== */
+
+/* 触摸友好：按钮/可点击元素最小44px触摸区域（移动端） */
+@media (max-width: 768px) {
+  button,
+  a[role="button"],
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* 表单控件触摸区域 */
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  select {
+    min-height: 44px;
+  }
+}
+
+/* safe-area-inset 支持（iPhone 刘海屏 / 底部安全区域） */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.safe-area-left {
+  padding-left: env(safe-area-inset-left);
+}
+.safe-area-right {
+  padding-right: env(safe-area-inset-right);
+}
+.safe-area {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* 小屏字体大小优化 */
+@media (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+  h1 {
+    font-size: 1.75rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ========================================
+   PWA standalone 模式样式
+   ======================================== */
+
+/* 以独立显示模式运行时的样式 */
+@media (display-mode: standalone) {
+  /* 适配无浏览器顶栏的安全区域 */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* 隐藏 PWA 安装提示相关元素 */
+  .pwa-install-prompt {
+    display: none;
+  }
+
+  /* 独立模式下导航栏固定顶部 */
+  nav {
+    padding-top: env(safe-area-inset-top);
+  z-index: 60;
+  }
+}
+
+/* iOS Safari 独立模式（添加到主屏幕后） */
+@media all and (display-mode: standalone) and (orientation: portrait) {
+  body {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
