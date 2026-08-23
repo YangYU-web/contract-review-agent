@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ['pdf-parse', 'mammoth'],
-  },
+  // Cloudflare Pages: 不使用 serverComponentsExternalPackages，让所有包都被打包
+  experimental: {},
   allowedDevOrigins: [
     '*.traecontent.cn',
     '*.agent-sandbox-bj-c1-gw.traecontent.cn',
