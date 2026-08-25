@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import FileUpload from '@/components/FileUpload';
 import { Loader2, CheckCircle2, AlertCircle, ArrowRight, Layers } from 'lucide-react';
+import { parseDocumentClient } from '@/lib/client-parser';
 
 type Step = 'upload' | 'parsing' | 'analyzing' | 'complete' | 'error';
 
@@ -86,16 +87,30 @@ export default function UploadPage() {
     startTimer();
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      // ===== 客户端解析文档 =====
+      let contractText: string;
+      try {
+        contractText = await parseDocumentClient(file);
+      } catch (err) {
+        throw new Error(`文档解析失败: ${err instanceof Error ? err.message : '未知错误'}`);
+      }
+
+      if (!contractText || contractText.trim().length < 50) {
+        throw new Error('文档解析结果为空或内容过少，请检查文件是否为有效合同文档');
+      }
 
       setProgressMsg('AI正在审查合同风险...');
       setStep('analyzing');
 
-      // 提交审查请求（异步，立即返回 jobId）
+      // 发送解析后的文本到 API
       const response = await fetch('/api/review', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: contractText,
+          filename: file.name,
+          fileSize: file.size,
+        }),
       });
 
       // 安全解析响应

@@ -1,14 +1,14 @@
 // ===== 合同审查 API 路由（异步模式） =====
-// POST: 接收文件，解析文档，启动后台AI审查，立即返回任务ID
+// POST: 接收已解析的合同文本，启动后台AI审查，立即返回任务ID
 // GET: 轮询审查状态
 
 export const runtime = 'edge';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { parseDocument } from '@/lib/contract-parser';
 import { isClaudeConfigured, reviewContract } from '@/lib/claude';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { MOCK_REVIEW_RESULT } from '@/lib/mock-data';
+import { detectContractType, extractContractTitle } from '@/lib/contract-parser';
 
 // 全局任务存储（开发模式下服务器持续运行）
 type JobStatus = 'parsing' | 'analyzing' | 'completed' | 'failed';
@@ -41,47 +41,29 @@ const reviewJobs = globalForReview.__reviewJobs;
 // ===== POST: 启动审查 =====
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.formData();
-    const file = formData.get('file') as File;
+    const body = await request.json();
+    const { text: contractText, filename, fileSize } = body;
 
-    if (!file) {
-      return NextResponse.json({ error: '未找到文件' }, { status: 400 });
+    if (!contractText) {
+      return NextResponse.json({ error: '未找到合同文本' }, { status: 400 });
     }
 
-    // 文件大小限制 10MB
-    if (file.size > 10 * 1024 * 1024) {
-      return NextResponse.json({ error: '文件大小超过10MB限制' }, { status: 400 });
-    }
-
-    // 检测文件类型
-    const filename = file.name;
-    let fileType: 'pdf' | 'docx' | 'txt';
-    if (filename.endsWith('.pdf')) fileType = 'pdf';
-    else if (filename.endsWith('.docx')) fileType = 'docx';
-    else if (filename.endsWith('.txt')) fileType = 'txt';
-    else return NextResponse.json({ error: '不支持的文件格式，请上传 PDF、Word 或文本文件' }, { status: 400 });
-
-    // 读取文件内容
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    // ===== Step 1: 同步解析文档 =====
-    let contractText: string;
-    try {
-      contractText = await parseDocument(buffer, fileType);
-    } catch (err) {
-      return NextResponse.json({
-        error: `文档解析失败: ${err instanceof Error ? err.message : '未知错误'}`
-      }, { status: 500 });
-    }
-
-    if (!contractText || contractText.trim().length < 50) {
+    if (contractText.trim().length < 50) {
       return NextResponse.json({
         error: '文档解析结果为空或内容过少，请检查文件是否为有效合同文档'
       }, { status: 400 });
     }
 
-    // ===== Step 2: 创建审查任务，后台执行 =====
+    // 推断文件类型
+    const fname = filename || 'contract.txt';
+    let fileType: 'pdf' | 'docx' | 'txt';
+    if (fname.endsWith('.pdf')) fileType = 'pdf';
+    else if (fname.endsWith('.docx')) fileType = 'docx';
+    else fileType = 'txt';
+
+    const fsize = fileSize || contractText.length;
+
+    // ===== 创建审查任务，后台执行 =====
     const reviewId = crypto.randomUUID();
     const jobId = crypto.randomUUID();
 
@@ -91,7 +73,7 @@ export async function POST(request: NextRequest) {
     });
 
     // 后台执行 AI 审查（不阻塞响应）
-    processReviewAsync(jobId, reviewId, contractText, filename, fileType, file.size).catch(err => {
+    processReviewAsync(jobId, reviewId, contractText, fname, fileType, fsize).catch(err => {
       console.error('Background review failed:', err);
       const job = reviewJobs.get(jobId);
       if (job) {
