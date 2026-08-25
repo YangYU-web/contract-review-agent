@@ -1,4 +1,6 @@
 // ===== 审批流 API =====
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { createApprovalFlow, advanceApprovalFlow, getMockApprovalFlow } from '@/lib/approval-flow';
 import { isSupabaseConfigured } from '@/lib/supabase';

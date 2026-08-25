@@ -2,6 +2,8 @@
 // 提供签章请求列表、统计查询，以及创建 / 签署 / 拒签 / 作废操作
 // 演示模式：签章请求存储在内存中的模块级变量
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   signatureStore,

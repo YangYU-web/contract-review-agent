@@ -2,6 +2,8 @@
 // 提供合同摘要生成能力：接收合同文本，调用摘要库提取主体、财务、日期、术语并生成风险评估
 // 演示模式：当 text 缺失或 demo=true 时返回 mock 摘要数据
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { generateSummary, getMockSummary } from '@/lib/contract-summary';
 

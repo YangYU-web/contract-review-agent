@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { useState } from 'react';
 import { GitCompare, ArrowRight, FileText } from 'lucide-react';
 import ContractDiffView from '@/components/ContractDiffView';

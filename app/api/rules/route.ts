@@ -3,6 +3,8 @@
 // 数据存储：Supabase custom_risk_rules 表，失败时降级为 Mock 数据
 // 说明：DELETE 通过 POST + action=delete 实现，以适配演示模式
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   CustomRiskRule,

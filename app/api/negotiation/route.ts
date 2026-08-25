@@ -2,6 +2,8 @@
 // 提供谈判会话列表与统计查询，以及创建、添加条款、达成条款、添加让步、更新立场、分析能力
 // 优先使用 Supabase 数据库（negotiation_sessions 表），数据库未配置或操作失败时优雅降级到内存 Mock 数据。
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   NegotiationSession,

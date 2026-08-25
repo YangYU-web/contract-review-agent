@@ -2,6 +2,8 @@
 // 提供 webhook 列表与投递日志查询，以及 webhook 的增删改与测试
 // 数据存储：Supabase webhook_configs 表（配置），投递日志降级为 Mock 数据
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { WebhookConfig, WebhookDeliveryLog, WebhookEvent } from '@/lib/types';
 import {

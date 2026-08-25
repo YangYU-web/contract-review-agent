@@ -5,6 +5,8 @@
 //       actor_id / actor_role / contract_title / risk_id / ip_address / user_agent
 //       存入 details JSONB 中
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { AuditAction, AuditLogEntry } from '@/lib/types';
 import {

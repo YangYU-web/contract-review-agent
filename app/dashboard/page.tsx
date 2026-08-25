@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import Link from 'next/link';
 import { FileText, AlertTriangle, ChevronRight, Clock } from 'lucide-react';
 import { getMockContracts } from '@/lib/mock-data';

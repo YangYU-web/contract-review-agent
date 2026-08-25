@@ -1,6 +1,8 @@
 // ===== 合同到期管理页面 =====
 // 服务端组件：展示合同生命周期统计与到期列表
 
+export const runtime = 'edge';
+
 import { Calendar, Clock, AlertTriangle, CheckCircle, XCircle, FileText } from 'lucide-react';
 import {
   getMockLifecycles,

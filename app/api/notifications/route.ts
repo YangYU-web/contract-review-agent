@@ -2,6 +2,8 @@
 // 提供通知列表与统计查询，以及创建并发送通知
 // 数据存储：Supabase email_notifications 表，失败时降级为 Mock 数据
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   EmailNotification,

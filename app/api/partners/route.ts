@@ -3,6 +3,8 @@
 // 数据存储：优先使用 Supabase 数据库（partner_profiles / partner_credit_history），
 // 数据库未配置或操作失败时优雅降级到内存 Mock 数据
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   PartnerProfile,

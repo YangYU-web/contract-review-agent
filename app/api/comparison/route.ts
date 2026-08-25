@@ -1,4 +1,6 @@
 // ===== 条款比对 API =====
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { compareClauses, getMockComparison } from '@/lib/clause-comparison';
 import { isSupabaseConfigured } from '@/lib/supabase';

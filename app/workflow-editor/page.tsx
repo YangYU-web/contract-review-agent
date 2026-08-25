@@ -3,6 +3,8 @@
 // ===== 工作流引擎页面 =====
 // 页面标题 + WorkflowEditor 组件 + 底部节点类型说明
 
+export const runtime = 'edge';
+
 import { Workflow, Settings, Info } from 'lucide-react';
 import WorkflowEditor from '@/components/WorkflowEditor';
 

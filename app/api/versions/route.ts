@@ -2,6 +2,8 @@
 // 提供版本列表查询与版本创建能力
 // 数据存储：Supabase contract_versions 表，失败时降级为 Mock 数据
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { ContractVersion, VersionChange } from '@/lib/types';
 import {

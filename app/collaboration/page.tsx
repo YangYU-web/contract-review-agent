@@ -1,6 +1,8 @@
 // ===== 团队协作页面 =====
 // 服务端组件：展示团队协作概览（最近评论、待处理讨论）并嵌入评论组件
 
+export const runtime = 'edge';
+
 import {
   MessageSquare,
   Clock,

@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { Shield, Settings, Info } from 'lucide-react';
 import RuleManager from '@/components/RuleManager';
 

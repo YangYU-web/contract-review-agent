@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import BatchFileUpload from '@/components/BatchFileUpload';

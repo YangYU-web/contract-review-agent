@@ -1,4 +1,6 @@
 // ===== 合同生命周期管理 API =====
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { isSupabaseConfigured } from '@/lib/supabase';
 

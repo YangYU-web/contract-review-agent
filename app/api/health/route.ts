@@ -3,6 +3,8 @@
 // 数据存储：服务健康指标（API 网关、CDN、AI 等）使用 lib/system-health 的模拟数据，
 // 数据库部分使用真实的 Supabase 探测（对关键表做 count 查询验证连通性与各表状态）
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   getHealthDashboard,

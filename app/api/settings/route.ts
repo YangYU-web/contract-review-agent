@@ -1,4 +1,6 @@
 // ===== 用户设置 API =====
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { isSupabaseConfigured } from '@/lib/supabase';
 

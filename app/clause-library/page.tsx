@@ -4,6 +4,8 @@
 // 客户端组件：页头 + 智能条款库展示组件
 // 提供标准条款浏览、搜索筛选、变量渲染与条款推荐
 
+export const runtime = 'edge';
+
 import ClauseLibraryView from '@/components/ClauseLibraryView';
 import { Library, BookOpen, Sparkles } from 'lucide-react';
 

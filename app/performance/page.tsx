@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { Activity, Target, Flag } from 'lucide-react';
 import PerformanceTracking from '@/components/PerformanceTracking';
 

@@ -4,6 +4,8 @@
 // 展示合同、主体、条款、风险等实体之间的关系网络
 // 提供交互式可视化、检索、关联展开与图谱洞察
 
+export const runtime = 'edge';
+
 import { Network, Share2, Sparkles } from 'lucide-react';
 import KnowledgeGraphView from '@/components/KnowledgeGraphView';
 

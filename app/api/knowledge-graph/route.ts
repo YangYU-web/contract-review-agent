@@ -3,6 +3,8 @@
 // 优先使用 Supabase 数据库：从 contracts / partner_profiles / contract_risks /
 // contract_lifecycles 表动态构建图节点与边；数据库未配置或查询失败时优雅降级到 Mock 数据。
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   getMockKnowledgeGraph,

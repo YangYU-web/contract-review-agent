@@ -3,6 +3,8 @@
 // 优先使用 Supabase 数据库（risk_simulations 表）持久化模拟结果，数据库未配置或操作失败时优雅降级到内存 Mock 数据。
 // 蒙特卡洛模拟算法逻辑保持不变（复用 lib/risk-simulation 的 runSimulation）。
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { RiskSimulation, SimulationScenario } from '@/lib/types';
 import { isSupabaseConfigured } from '@/lib/supabase';

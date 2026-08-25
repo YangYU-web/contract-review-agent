@@ -2,6 +2,8 @@
 // 提供合规规则列表查询与合同合规报告生成能力
 // 演示模式：当 text 缺失或 demo=true 时返回 mock 合规报告
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   getComplianceRules,

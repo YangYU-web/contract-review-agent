@@ -2,6 +2,8 @@
 // 接收查询参数并调用搜索引擎返回结果
 // 支持空查询返回全部合同
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { searchContracts, getSearchSuggestions } from '@/lib/search-engine';
 import { SearchFilter } from '@/lib/types';

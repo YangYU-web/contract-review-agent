@@ -1,6 +1,8 @@
 // ===== 风险趋势预警页面 =====
 // 服务端组件：标题区 + 嵌入 RiskAlertDashboard 客户端组件
 
+export const runtime = 'edge';
+
 import { Bell, Shield } from 'lucide-react';
 import RiskAlertDashboard from '@/components/RiskAlertDashboard';
 import { getMockAlerts, getMockTrendData } from '@/lib/risk-alerts';

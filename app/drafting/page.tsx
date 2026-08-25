@@ -3,6 +3,8 @@
 // ===== 合同起草助手页面 =====
 // 客户端组件：标题 + 起草编辑器 + 右侧历史起草项目侧边栏
 
+export const runtime = 'edge';
+
 import { useState, useEffect, useCallback } from 'react';
 import {
   PenLine,

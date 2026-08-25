@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 import { getMockDashboardStats } from '@/lib/analytics';
 import { isSupabaseConfigured } from '@/lib/supabase';

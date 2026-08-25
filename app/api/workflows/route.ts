@@ -3,6 +3,8 @@
 // 优先使用 Supabase 数据库（workflow_definitions / workflow_instances 表），
 // 数据库未配置或操作失败时优雅降级到内存 Mock 数据。
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   WorkflowDefinition,

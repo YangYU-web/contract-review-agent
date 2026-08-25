@@ -1,6 +1,8 @@
 // ===== 风险决策更新 API =====
 // 用户采纳或驳回AI修改建议
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { isSupabaseConfigured } from '@/lib/supabase';
 

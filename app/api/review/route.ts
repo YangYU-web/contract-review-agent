@@ -2,6 +2,8 @@
 // POST: 接收文件，解析文档，启动后台AI审查，立即返回任务ID
 // GET: 轮询审查状态
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { parseDocument } from '@/lib/contract-parser';
 import { isClaudeConfigured, reviewContract } from '@/lib/claude';

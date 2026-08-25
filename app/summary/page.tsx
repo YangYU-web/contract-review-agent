@@ -4,6 +4,8 @@
 // 客户端组件：合同文本输入区 + 生成摘要按钮 + 摘要展示组件
 // 支持粘贴合同文本一键生成摘要，并提供示例合同一键填充
 
+export const runtime = 'edge';
+
 import { useState } from 'react';
 import {
   Sparkles,

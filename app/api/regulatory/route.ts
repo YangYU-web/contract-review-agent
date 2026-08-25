@@ -3,6 +3,8 @@
 // 优先使用 Supabase 数据库（regulatory_changes 表），数据库未配置或操作失败时优雅降级到内存 Mock 数据。
 // 注：合规差距（gaps）无专门数据库表，始终由 Mock 数据生成。
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   RegulatoryChange,

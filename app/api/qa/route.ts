@@ -1,6 +1,8 @@
 // ===== AI合同问答 API 路由 =====
 // 接收合同ID和问题，返回基于合同内容的智能回答及相关条款引用
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { isClaudeConfigured, askContractQuestion } from '@/lib/claude';
 import { isSupabaseConfigured } from '@/lib/supabase';

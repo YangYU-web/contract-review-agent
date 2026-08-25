@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { useState } from 'react';
 import { Settings, Key, Database, Zap, Bell, Save, Check } from 'lucide-react';
 import { useAuth } from '@/components/AuthProvider';

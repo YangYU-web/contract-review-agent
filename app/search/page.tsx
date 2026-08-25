@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { Search } from 'lucide-react';
 import FullTextSearch from '@/components/FullTextSearch';
 

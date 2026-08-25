@@ -1,6 +1,8 @@
 // ===== 审查报告预览页面 =====
 // 服务端组件，获取合同数据并渲染HTML审查报告
 
+export const runtime = 'edge';
+
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronRight, Home, FileText } from 'lucide-react';

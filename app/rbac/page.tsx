@@ -3,6 +3,8 @@
 // ===== 角色权限管理页面 =====
 // 客户端组件：统计卡片 + 权限矩阵 + 团队成员列表 + 权限说明
 
+export const runtime = 'edge';
+
 import { useState, useEffect, useCallback } from 'react';
 import { Shield, Users, Lock, KeyRound, XCircle } from 'lucide-react';
 import PermissionMatrix from '@/components/PermissionMatrix';

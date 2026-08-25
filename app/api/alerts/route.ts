@@ -2,6 +2,8 @@
 // 提供预警列表与趋势数据的查询，以及预警状态的确认 / 解决
 // 数据存储：Supabase risk_alerts 表，失败时降级为 Mock 数据
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   RiskAlert,

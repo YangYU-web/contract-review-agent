@@ -1,6 +1,8 @@
 // ===== 邮件通知中心页面 =====
 // 服务端组件：标题区 + 嵌入 NotificationList 客户端组件
 
+export const runtime = 'edge';
+
 import { Bell, Mail } from 'lucide-react';
 import NotificationList from '@/components/NotificationList';
 import { getMockNotifications, getNotificationStats } from '@/lib/notifications';

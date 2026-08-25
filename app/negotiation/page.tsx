@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { Handshake, Info, Scale } from 'lucide-react';
 import NegotiationAssistant from '@/components/NegotiationAssistant';
 

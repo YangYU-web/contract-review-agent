@@ -1,6 +1,8 @@
 // ===== 多语言合同审查 API =====
 // 提供语言检测与中英文条款对比两类能力
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   detectLanguage,

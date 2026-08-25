@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { useState, useRef } from 'react';
 import { FileText, MessageSquare, Sparkles } from 'lucide-react';
 import ContractQA, { ContractQAHandle } from '@/components/ContractQA';

@@ -1,6 +1,8 @@
 // ===== 审查报告导出 API =====
 // 接收合同ID和导出格式，生成并返回完整审查报告
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { getMockContracts, getMockRisks, MOCK_REVIEW_RESULT } from '@/lib/mock-data';

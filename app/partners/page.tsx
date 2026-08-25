@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { Building2, Users, Shield } from 'lucide-react';
 import PartnerProfileView from '@/components/PartnerProfileView';
 

@@ -1,6 +1,8 @@
 // ===== Webhook 集成页面 =====
 // 服务端组件：标题区 + Webhook 管理面板 + 底部说明区域
 
+export const runtime = 'edge';
+
 import { Webhook, Settings, Info, Shield, Key, Activity } from 'lucide-react';
 import WebhookManager from '@/components/WebhookManager';
 import { getStoredWebhooks, getWebhookStats } from '@/lib/webhooks';

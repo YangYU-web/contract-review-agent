@@ -2,6 +2,8 @@
 
 // ===== 高级数据可视化页面 =====
 
+export const runtime = 'edge';
+
 import { useState, useMemo } from 'react';
 import {
   BarChart3, PieChart, TrendingUp, Grid3x3, Calendar, Download,

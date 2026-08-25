@@ -1,6 +1,8 @@
 // ===== 审计追踪与合规页面 =====
 // 服务端组件：标题区 + 左侧合规报告摘要 + 右侧审计日志时间线
 
+export const runtime = 'edge';
+
 import { Shield, History, FileText, XCircle, Activity, User } from 'lucide-react';
 import AuditTrailView from '@/components/AuditTrailView';
 import { getMockAuditLogs, generateComplianceReport } from '@/lib/audit-trail';

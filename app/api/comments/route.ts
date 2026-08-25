@@ -2,6 +2,8 @@
 // 团队协作评论的查询、创建、回复与标记已解决
 // 数据存储：Supabase contract_comments 表，失败时降级为 Mock 数据
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { ContractComment } from '@/lib/types';
 import { getMockComments, extractMentions } from '@/lib/comments';

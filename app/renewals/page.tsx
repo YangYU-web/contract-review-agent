@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { RefreshCw, CalendarClock, Info, Settings } from 'lucide-react';
 import RenewalManager from '@/components/RenewalManager';
 

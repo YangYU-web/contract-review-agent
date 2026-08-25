@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { FileSignature, Shield, Info } from 'lucide-react';
 import SignatureManager from '@/components/SignatureManager';
 

@@ -3,6 +3,8 @@
 // ===== 法规变更监控页面 =====
 // 页面标题 + RegulatoryMonitor 组件 + 监控范围说明
 
+export const runtime = 'edge';
+
 import { Gavel, Scale, Info } from 'lucide-react';
 import RegulatoryMonitor from '@/components/RegulatoryMonitor';
 

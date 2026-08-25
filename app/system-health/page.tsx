@@ -1,6 +1,8 @@
 // ===== 系统健康监控页面 =====
 // 服务端组件：标题区 + 自动刷新间隔提示 + 嵌入 SystemHealthDashboard 客户端组件
 
+export const runtime = 'edge';
+
 import { Activity, Server, RefreshCw } from 'lucide-react';
 import SystemHealthDashboard from '@/components/SystemHealthDashboard';
 import { getHealthDashboard } from '@/lib/system-health';

@@ -1,6 +1,8 @@
 // ===== 合同对比分析 API =====
 // 接收两份合同文本，调用对比分析函数，返回差异结果
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { compareContracts, getMockComparisonResult } from '@/lib/contract-diff';
 

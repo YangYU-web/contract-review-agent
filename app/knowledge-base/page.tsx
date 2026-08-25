@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import KnowledgeBaseView from '@/components/KnowledgeBaseView';
 import { getMockKnowledgeBase } from '@/lib/knowledge-base';
 import { isSupabaseConfigured } from '@/lib/supabase';

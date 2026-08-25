@@ -3,6 +3,8 @@
 // ===== AI 智能定价分析页面 =====
 // 页面标题 + PricingAnalysisView 组件
 
+export const runtime = 'edge';
+
 import { DollarSign, TrendingUp, Sparkles } from 'lucide-react';
 import PricingAnalysisView from '@/components/PricingAnalysisView';
 

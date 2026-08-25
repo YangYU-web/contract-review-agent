@@ -3,6 +3,8 @@
 // 优先使用 Supabase 数据库（ocr_results 表）存储/查询历史记录，数据库未配置或操作失败时优雅降级到内存 Mock 数据。
 // 注意：OCR 识别本身保留模拟实现（因为没有真实OCR引擎），仅历史记录改为数据库查询。
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import {
   simulateOCR,

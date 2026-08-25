@@ -1,6 +1,8 @@
 // ===== 批量合同审查 API 路由 =====
 // 接收多个合同文件，并行执行审查逻辑，返回批量结果
 
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { parseDocument, detectContractType, extractContractTitle } from '@/lib/contract-parser';
 import { isClaudeConfigured, reviewContract } from '@/lib/claude';

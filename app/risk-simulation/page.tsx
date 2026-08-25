@@ -3,6 +3,8 @@
 // ===== 合同风险模拟页面 =====
 // 页面标题 + RiskSimulationView 组件
 
+export const runtime = 'edge';
+
 import { FlaskConical, TrendingDown, Activity } from 'lucide-react';
 import RiskSimulationView from '@/components/RiskSimulationView';
 
